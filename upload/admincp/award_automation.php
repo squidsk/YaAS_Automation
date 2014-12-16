@@ -5,7 +5,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 // ##################### DEFINE IMPORTANT CONSTANTS #######################
 define('NO_REGISTER_GLOBALS', 1);
-define('THIS_SCRIPT', 'award_version_info.php');
+define('THIS_SCRIPT', 'YAAS_AUTOMATION_ADMIN');
 
 // #################### PRE-CACHE TEMPLATES AND DATA ######################
 $phrasegroups = array();
@@ -13,10 +13,6 @@ $specialtemplates = array();
 
 // ########################## REQUIRE BACK-END ############################
 require_once('./global.php');
-require_once(DIR . '/includes/class_bbcode.php');
-$bbcode_parser =& new vB_BbCodeParser($vbulletin, fetch_tag_list());
-
-$this_script = 'award_version_info';
 
 global $vbulletin;
 
@@ -68,7 +64,7 @@ if ($_REQUEST['do'] == 'manage')
 		$cell[] = $celldata[auto_type];
 		$cell[] = $celldata[auto_criteria];
 		$cell[] = $celldata[auto_awardid];
-		$cell[] = "[ <a href='award_automation.php?do=delete&taskid=$celldata[auto_awardid]'>Delete</a> ]";
+		$cell[] = "[ <a href='award_automation.php?do=delete&taskid=$celldata[award_automation_id]'>Delete</a> ]";
 		
 	print_cells_row($cell, 0, '', 1);
 	}
@@ -130,7 +126,7 @@ if ($_POST['do'] == 'insert')
 
 if ($_REQUEST['do'] == 'delete')
 {
-	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "award_automation WHERE (auto_awardid = '$_GET[taskid]')");
+	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "award_automation WHERE (award_automation_id = '$_GET[taskid]')");
 	define('CP_REDIRECT', 'award_automation.php?do=manage');
 	print_stop_message('award_automation_task_deleted');
 }

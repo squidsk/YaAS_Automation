@@ -3,7 +3,7 @@
 <product productid="yet_another_award_system_automation" active="1">
 	<title>Yet Another Award System Automation</title>
 	<description>Yet Another Awards System Automation for YaAS</description>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<url>http://www.vbulletin.org/forum/showthread.php?t=232684</url>
 	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=checkversion&t=232684]]></versioncheckurl>
 	<dependencies>
@@ -64,7 +64,7 @@
 	<phrases>
 		<phrasetype name="Control Panel Global" fieldname="cpglobal">
 			<phrase name="award_automation" date="0" username="" version="1.0.0"><![CDATA[Award Automation]]></phrase>
-			<phrase name="award_automation_version" date="0" username="" version="1.0.3"><![CDATA[Award Automation - Release 3]]></phrase>
+			<phrase name="award_automation_version" date="0" username="" version="1.0.3"><![CDATA[Award Automation - Release 4]]></phrase>
 			<phrase name="award_automation_name" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Automation Task Name]]></phrase>
 			<phrase name="award_automation_awardid" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Award ID to Automate]]></phrase>
 			<phrase name="award_automation_type" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Criteria Type]]></phrase>

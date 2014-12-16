@@ -18,3 +18,8 @@
     * Fixed - Uninstalling product not droping the award cgroup column from the award_users table
     * Fixed - Granting of usergroup criteria awards to incorrect usergroups
     * Fixed - Apostrophes in issue reason causing database errors
+
+1.0.4 R4
+
+    * Fixed - Deleted all instance of the award being automated instead of the selected one
+    * Fixed - Deprecation warning in admincp/award_automation.php
