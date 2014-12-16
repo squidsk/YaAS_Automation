@@ -3,7 +3,7 @@
 <product productid="yet_another_award_system_automation" active="1">
 	<title>Yet Another Award System Automation</title>
 	<description>Yet Another Awards System Automation for YaAS</description>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<url>http://www.vbulletin.org/forum/showthread.php?t=232684</url>
 	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=checkversion&t=232684]]></versioncheckurl>
 	<dependencies>
@@ -16,37 +16,42 @@
 			<installcode><![CDATA[
 			
 				$db->reporterror = 0;
-				// NEW INSTALL CODE
-				if ($installed_version == null) {
-				
 				$db->query_write("ALTER TABLE " . TABLE_PREFIX . "award_user ADD award_cgroup VARCHAR( 15 )");
 				echo "<font size=\"1\">Alter table - award_user - criteria group</font><br />";
-				
-				}
+				$db->reporterror = 1;
 				]]>
 			</installcode>
-			<uninstallcode />
+			<uninstallcode><![CDATA[
+				$db->reporterror = 0;
+				$db->query_write("ALTER TABLE " . TABLE_PREFIX . "award_user DROP award_cgroup");
+				echo "<font size=\"1\">Alter table - award_user - Dropped Column: criteria group</font><br />";
+				$db->reporterror = 1;
+			]]></uninstallcode>
 		</code>
 		<code version="1.0.2">
 			<installcode><![CDATA[						// CREATE AWARD AUTOMATION TABLE
 				$db->reporterror = 0;
-		
-					$db->query_write("CREATE TABLE " . TABLE_PREFIX . "award_automation (
-						  award_automation_id int(10) unsigned NOT NULL auto_increment,
-						  auto_active int(1) NOT NULL,
-						  auto_name varchar(32) NOT NULL,
-						  auto_issuereason varchar(255) NOT NULL,
-						  auto_type varchar(32) NOT NULL,
-						  auto_criteria int(10) NOT NULL,
-						  auto_awardid int(10) NOT NULL,
-						  PRIMARY KEY  (award_automation_id)
-						) 
-					");
-					echo "<font size=\"1\">Added Table - Award Automation</font><br />";
-			
+				$db->query_write("CREATE TABLE IF NOT EXISTS " . TABLE_PREFIX . "award_automation (
+					  award_automation_id int(10) unsigned NOT NULL auto_increment,
+					  auto_active int(1) NOT NULL,
+					  auto_name varchar(32) NOT NULL,
+					  auto_issuereason varchar(255) NOT NULL,
+					  auto_type varchar(32) NOT NULL,
+					  auto_criteria int(10) NOT NULL,
+					  auto_awardid int(10) NOT NULL,
+					  PRIMARY KEY  (award_automation_id)
+					) 
+				");
+				echo "<font size=\"1\">Added Table - Award Automation</font><br />";
+				$db->reporterror = 1;
 			]]>
 			</installcode>
-			<uninstallcode />
+			<uninstallcode><![CDATA[
+				$db->reporterror = 0;
+				$db->query_write("DROP TABLE IF EXISTS " . TABLE_PREFIX . "award_automation");
+				echo "<font size=\"1\">Dropped Table - Award Automation</font><br />";
+				$db->reporterror = 1;
+			]]></uninstallcode>
 		</code>
 	</codes>
 	
@@ -59,7 +64,7 @@
 	<phrases>
 		<phrasetype name="Control Panel Global" fieldname="cpglobal">
 			<phrase name="award_automation" date="0" username="" version="1.0.0"><![CDATA[Award Automation]]></phrase>
-			<phrase name="award_automation_version" date="0" username="" version="1.0.2"><![CDATA[Award Automation - Release 2]]></phrase>
+			<phrase name="award_automation_version" date="0" username="" version="1.0.3"><![CDATA[Award Automation - Release 3]]></phrase>
 			<phrase name="award_automation_name" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Automation Task Name]]></phrase>
 			<phrase name="award_automation_awardid" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Award ID to Automate]]></phrase>
 			<phrase name="award_automation_type" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Criteria Type]]></phrase>

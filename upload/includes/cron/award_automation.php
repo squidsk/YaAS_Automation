@@ -41,7 +41,7 @@ while ($array1 = $vbulletin->db->fetch_array($userMaxAwardCriteria))
 			// Remove Previous Postcount Awards
 			$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "award_user WHERE award_cgroup = 'postcount' AND userid=$array1[UserID]");
 			// Issue New Postcount Award
-			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$array2[auto_awardid]', '$array1[UserID]', '$array2[auto_issuereason]', " . time() . ", 'postcount')");
+			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$array2[auto_awardid]', '$array1[UserID]', '" . addslashes($array2['auto_issuereason']) . "', " . time() . ", 'postcount')");
    		}
 	}
 }
@@ -59,7 +59,7 @@ while ($usergroupAwardsArray = $vbulletin->db->fetch_array($usergroupAwards))
 		SELECT userid
 		FROM " . TABLE_PREFIX . "user
 		WHERE (usergroupid=$usergroupAwardsArray[auto_criteria])
-		OR membergroupids LIKE '%".$usergroupAwardsArray[auto_criteria]."%'
+		OR " . $usergroupAwardsArray[auto_criteria] . " IN (membergroupids)
 		");
 		
 	while ($array3 = $vbulletin->db->fetch_array($getUsersWithGroup))
@@ -74,7 +74,7 @@ while ($usergroupAwardsArray = $vbulletin->db->fetch_array($usergroupAwards))
 		
 		if (empty($alreadyissued)) {
 			// Issue New Usergroup Award
-			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$usergroupAwardsArray[auto_awardid]', '$array3[userid]', '$usergroupAwardsArray[auto_issuereason]', " . time() . ", 'usergroup')");
+			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$usergroupAwardsArray[auto_awardid]', '$array3[userid]', '" . addslashes($usergroupAwardsArray['auto_issuereason']) . "', " . time() . ", 'usergroup')");
 		}
 	}
 }
@@ -111,7 +111,7 @@ while ($array1 = $vbulletin->db->fetch_array($userMaxAwardCriteria))
 			// Remove Previous Postcount Awards
 			$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "award_user WHERE award_cgroup = 'daysasmember' AND userid=$array1[UserID]");
 			// Issue New Postcount Award
-			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$array2[auto_awardid]', '$array1[UserID]', '$array2[auto_issuereason]', " . time() . ", 'daysasmember')");
+			$vbulletin->db->query_write("INSERT INTO " . TABLE_PREFIX . "award_user (award_id, userid, issue_reason, issue_time, award_cgroup) VALUES ('$array2[auto_awardid]', '$array1[UserID]', '" . addslashes($array2['auto_issuereason']) . "', " . time() . ", 'daysasmember')");
 		}
 	}
 }

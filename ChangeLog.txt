@@ -11,3 +11,10 @@
     * Fixed - MySQL Version Requirement Errors
 
     * Database - Added award_automation table.
+
+1.0.3 R3
+
+    * Fixed - Uninstalling product not removing award_automation table
+    * Fixed - Uninstalling product not droping the award cgroup column from the award_users table
+    * Fixed - Granting of usergroup criteria awards to incorrect usergroups
+    * Fixed - Apostrophes in issue reason causing database errors
