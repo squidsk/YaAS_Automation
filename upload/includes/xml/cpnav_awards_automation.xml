@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<navgroups product="yet_another_award_system">
+	<navgroup phrase="award_system">
+		
+		<navoption displayorder="51">
+			<phrase>award_automation</phrase>
+			<link>award_automation.php</link>
+		</navoption>
+		
+	</navgroup>
+</navgroups>

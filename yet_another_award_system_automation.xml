@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<product productid="yet_another_award_system_automation" active="1">
+	<title>Yet Another Award System Automation</title>
+	<description>Yet Another Awards System Automation for YaAS</description>
+	<version>1.0.2</version>
+	<url>http://www.vbulletin.org/forum/showthread.php?t=232684</url>
+	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=checkversion&t=232684]]></versioncheckurl>
+	<dependencies>
+		<dependency dependencytype="vbulletin" minversion="3.8" maxversion="" />
+		<dependency dependencytype="mysql" minversion="5.0" maxversion="" />
+	</dependencies>
+	
+	<codes>
+		<code version="1.0.0">
+			<installcode><![CDATA[
+			
+				$db->reporterror = 0;
+				// NEW INSTALL CODE
+				if ($installed_version == null) {
+				
+				$db->query_write("ALTER TABLE " . TABLE_PREFIX . "award_user ADD award_cgroup VARCHAR( 15 )");
+				echo "<font size=\"1\">Alter table - award_user - criteria group</font><br />";
+				
+				}
+				]]>
+			</installcode>
+			<uninstallcode />
+		</code>
+		<code version="1.0.2">
+			<installcode><![CDATA[						// CREATE AWARD AUTOMATION TABLE
+				$db->reporterror = 0;
+		
+					$db->query_write("CREATE TABLE " . TABLE_PREFIX . "award_automation (
+						  award_automation_id int(10) unsigned NOT NULL auto_increment,
+						  auto_active int(1) NOT NULL,
+						  auto_name varchar(32) NOT NULL,
+						  auto_issuereason varchar(255) NOT NULL,
+						  auto_type varchar(32) NOT NULL,
+						  auto_criteria int(10) NOT NULL,
+						  auto_awardid int(10) NOT NULL,
+						  PRIMARY KEY  (award_automation_id)
+						) 
+					");
+					echo "<font size=\"1\">Added Table - Award Automation</font><br />";
+			
+			]]>
+			</installcode>
+			<uninstallcode />
+		</code>
+	</codes>
+	
+	<templates>
+	</templates>
+	
+	<plugins>
+	</plugins>
+	
+	<phrases>
+		<phrasetype name="Control Panel Global" fieldname="cpglobal">
+			<phrase name="award_automation" date="0" username="" version="1.0.0"><![CDATA[Award Automation]]></phrase>
+			<phrase name="award_automation_version" date="0" username="" version="1.0.2"><![CDATA[Award Automation - Release 2]]></phrase>
+			<phrase name="award_automation_name" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Automation Task Name]]></phrase>
+			<phrase name="award_automation_awardid" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Award ID to Automate]]></phrase>
+			<phrase name="award_automation_type" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Criteria Type]]></phrase>
+			<phrase name="award_automation_criteria" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Criteria<br />Only use numbers.<br />Use ID for Usergroups]]></phrase>
+			<phrase name="award_automation_criteria_postcount" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Post Count]]></phrase>
+			<phrase name="award_automation_criteria_usergroup" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Usergroup]]></phrase>
+			<phrase name="award_automation_criteria_daysasmember" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Days as Member]]></phrase>
+			<phrase name="award_automation_remove_previous" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Remove Award IDs<br />Award IDs to remove from user when this award is issued seperated by comma]]></phrase>
+			<phrase name="award_automation_active_task" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Enable Automation Task?]]></phrase>
+			<phrase name="award_automation_userid" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[User ID]]></phrase>
+			<phrase name="award_automation_log" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Award Automation Log]]></phrase>
+		</phrasetype>
+		<phrasetype name="Error Messages" fieldname="error">
+			<phrase name="saved_award_automation_successfully" date="0" username="" version=""><![CDATA[Saved Award Automation Task]]></phrase>
+			<phrase name="award_automation_criteriatype_na" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Criteria Type Not Yet Implemented]]></phrase>
+			<phrase name="award_automation_task_deleted" date="1259405901" username="Cypher" version="1.0.0"><![CDATA[Automation Task Deleted]]></phrase>
+		</phrasetype>
+		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
+			<phrase name="setting_aw_automation_desc" date="1209962071" username="Cypher" version="1.0.0"><![CDATA[Do you want to enable the Automation System?<br /><i>Requires MySQL 5+</i>?]]></phrase>
+			<phrase name="setting_aw_automation_title" date="1209962071" username="Cypher" version="1.0.0"><![CDATA[Automation:  Enable Automation System]]></phrase>
+		</phrasetype>
+	</phrases>
+	
+	<options>
+		<settinggroup name="awards" displayorder="1000">
+			<setting varname="aw_automation" displayorder="10">
+				<datatype>boolean</datatype>
+				<optioncode>yesno</optioncode>
+				<defaultvalue>0</defaultvalue>
+			</setting>
+		</settinggroup>
+	</options>
+	
+	<cronentries>
+		<cron varname="yaasautomation" active="1" loglevel="1">
+			<filename>./includes/cron/award_automation.php</filename>
+			<scheduling weekday="-1" day="-1" hour="1" minute="30" />
+		</cron>
+	</cronentries>
+	
+</product>
+	
+	
+	
+	
+	

@@ -1,0 +1,13 @@
+1.0.0 INITIAL RELEASE
+
+    * Added - Award Automation based on Post Count, and Usergroups, and Membership Lengths
+    * Added - Enable/Disable Border in Awards Showcase inside of Profile Tabs around the Issue Time and Reason
+    * Added - MySQL Version Checks to Automation System.
+
+    * Database - Added 'award_cgroup' column to award_user table
+
+1.0.2 R2
+
+    * Fixed - MySQL Version Requirement Errors
+
+    * Database - Added award_automation table.
